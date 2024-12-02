@@ -1,15 +1,16 @@
 // [<li>1</li>, <li>2</li>, <li>3</li>]
 
-import { QuizCard } from './QuizCard';
+import { QuizCard } from '../QuizCard';
+import { List, ListItem } from './QuizList.styled';
 
 export const QuizList = ({ items }) => {
   return (
-    <ul>
+    <List>
       {items.map(item => (
-        <li key={item.id}>
+        <ListItem key={item.id}>
           <QuizCard quiz={item} />
-        </li>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
