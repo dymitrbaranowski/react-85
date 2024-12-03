@@ -2,16 +2,16 @@ import { MetaWrapper, Topic, Wrapper, Text } from './QuizCard.styled';
 
 export const QuizCard = ({ quiz: { topic, level, time, questions } }) => {
   return (
-    <Wrapper>
+    <Wrapper level={level}>
       <Topic>{topic}</Topic>
       <MetaWrapper>
-        <Text>
+        <Text color="red">
           <b>Level:</b> {level}
         </Text>
-        <Text>
+        <Text color="green">
           <b>Time:</b> {time}
         </Text>
-        <Text>
+        <Text color="">
           <b>Questions:</b> {questions}
         </Text>
       </MetaWrapper>

@@ -1,8 +1,20 @@
 import styled from 'styled-components';
 
+const getBorderColor = props => {
+  switch (props.level) {
+    case 'beginner':
+      return 'green';
+    case 'intermediate':
+      return 'orange';
+    case 'advanced':
+      return 'red';
+    default:
+      return null;
+  }
+};
 export const Wrapper = styled.div`
   padding: 8px;
-  border: 1px solid black;
+  border: 5px solid ${getBorderColor};
   border-radius: 4px;
 `;
 
@@ -18,4 +30,8 @@ export const MetaWrapper = styled.div`
 
 export const Text = styled.p`
   margin: 0;
+
+  color: ${props => {
+    return props.color;
+  }};
 `;
