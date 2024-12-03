@@ -11,7 +11,7 @@ export const ListItem = styled.li`
   width: 300px;
   //background-color: orange;
 
-  :hover {
+  /* :hover {
     background-color: orange;
-  }
+  } */
 `;
