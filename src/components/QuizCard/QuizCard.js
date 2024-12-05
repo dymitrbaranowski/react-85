@@ -1,4 +1,6 @@
-import { MetaWrapper, Topic, Wrapper, Text } from './QuizCard.styled';
+import { MetaWrapper, Topic, Wrapper, Text, Button } from './QuizCard.styled';
+import { FaBeer } from 'react-icons/fa';
+import { HiCalendar } from 'react-icons/hi';
 
 export const QuizCard = ({ quiz: { topic, level, time, questions } }) => {
   return (
@@ -15,6 +17,9 @@ export const QuizCard = ({ quiz: { topic, level, time, questions } }) => {
           <b>Questions:</b> {questions}
         </Text>
       </MetaWrapper>
+      <Button>
+        <HiCalendar size={20} />
+      </Button>
     </Wrapper>
   );
 };

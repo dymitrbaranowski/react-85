@@ -1,27 +1,27 @@
 import styled from 'styled-components';
 
-const getBorderColor = ({ level }) => {
-  console.log(props);
-  switch (props.level) {
+const getBorderColor = ({ level, theme }) => {
+  // console.log(props);
+  switch (level) {
     case 'beginner':
-      return props.theme.colors.green;
+      return theme.colors.green;
     case 'intermediate':
-      return props.theme.colors.orange;
+      return theme.colors.orange;
     case 'advanced':
-      return props.theme.colors.red;
+      return theme.colors.red;
     default:
       return null;
   }
 };
 export const Wrapper = styled.div`
-  padding: 8px;
+  padding: ${props => props.theme.spacing(4)};
   border: 5px solid ${getBorderColor};
   border-radius: ${props => props.theme.radial.sm};
 `;
 
 export const Topic = styled.h2`
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: ${props => props.theme.spacing(3)};
 `;
 
 export const MetaWrapper = styled.div`
@@ -35,4 +35,20 @@ export const Text = styled.p`
   color: ${props => {
     return props.color;
   }};
+`;
+
+export const Button = styled.button`
+  padding: ${props => props.theme.spacing(1)};
+  margin: 0;
+  border: none;
+
+  :hover {
+    color: green;
+    background-color: blue;
+  }
+
+  svg {
+    display: block;
+    color: red;
+  }
 `;
