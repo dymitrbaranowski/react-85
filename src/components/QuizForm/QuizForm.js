@@ -29,6 +29,7 @@ export const QuizForm = ({ onAdd }) => {
       }}
       validationSchema={quizSchema}
       onSubmit={(values, actions) => {
+        console.log(values);
         onAdd(values);
         actions.resetForm();
       }}
