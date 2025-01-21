@@ -37,7 +37,7 @@ export const QuizForm = ({ onAdd }) => {
       <StyledForm>
         <Label>
           Topic
-          <StyledField name="topic" type="text" />
+          <StyledField name="topic" type="text" placeholder="Quiz topic..." />
           <ErrorMsg name="topic" component="div" />
         </Label>
         <Label>
