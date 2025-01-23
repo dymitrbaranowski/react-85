@@ -5,11 +5,13 @@ import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { fetchQuizzes } from './api';
+import { createQuiz, deleteQuizById, fetchQuizzes } from './api';
 
 export class App extends Component {
   state = {
     quizItems: [],
+    loading: false,
+    error: false,
     filters: {
       topic: '',
       level: 'all',
@@ -23,10 +25,13 @@ export class App extends Component {
     }
 
     try {
+      this.setState({ loading: true });
       const quizzes = await fetchQuizzes();
-      console.log(quizzes);
+      this.setState({ quizItems: quizzes });
     } catch (error) {
-      console.error('Error fetching data: ', error);
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
     }
   }
 
@@ -35,22 +40,34 @@ export class App extends Component {
       localStorage.setItem('quiz-filters', JSON.stringify(this.state.filters));
     }
   }
-  addQuiz = newQuiz => {
-    this.setState(prevState => ({
-      quizItems: [
-        ...prevState.quizItems,
-        {
-          id: nanoid(),
-          ...newQuiz,
-        },
-      ],
-    }));
+  addQuiz = async newQuiz => {
+    try {
+      this.setState({ loading: true, error: false });
+      const addedQuiz = await createQuiz(newQuiz);
+      this.setState(prevState => ({
+        quizItems: [...prevState.quizItems, addedQuiz],
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
-  deleteQuiz = quizId => {
-    this.setState(prevState => ({
-      quizItems: prevState.quizItems.filter(quiz => quiz.id !== quizId),
-    }));
+  deleteQuiz = async quizId => {
+    try {
+      this.setState({ loading: true, error: false });
+      const deletedQuiz = await deleteQuizById(quizId);
+      this.setState(prevState => ({
+        quizItems: prevState.quizItems.filter(
+          quiz => quiz.id !== deletedQuiz.id
+        ),
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   changeLevelFilter = newLevel => {
@@ -96,7 +113,7 @@ export class App extends Component {
   };
 
   render() {
-    const { filters } = this.state;
+    const { filters, loading, error } = this.state;
     const visibleItems = this.getVisibleQuizItems();
 
     return (
@@ -109,7 +126,12 @@ export class App extends Component {
           onChangeTopic={this.changeTopicFilter}
           onReset={this.resetFilters}
         />
-        <QuizList items={visibleItems} onDelete={this.deleteQuiz} />
+        {loading && <div>Loading...</div>}
+        {error && !loading && <div>Something went wrong...</div>}
+        {visibleItems.length > 0 && (
+          <QuizList items={visibleItems} onDelete={this.deleteQuiz} />
+        )}
+
         <GlobalStyle />
       </Layout>
     );
