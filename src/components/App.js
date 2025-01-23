@@ -1,27 +1,34 @@
 import { QuizForm } from './QuizForm/QuizForm';
 import { QuizList } from './QuizList/QuizList';
 import { SearchBar } from './SearchBar';
-import initialQuizItems from '../quiz-items.json';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { fetchQuizzes } from './api';
 
 export class App extends Component {
   state = {
-    quizItems: initialQuizItems,
+    quizItems: [],
     filters: {
       topic: '',
       level: 'all',
     },
   };
 
-  componentDidMount = () => {
+  async componentDidMount() {
     const savedFilters = localStorage.getItem('quiz-filters');
     if (savedFilters !== null) {
       this.setState({ filters: JSON.parse(savedFilters) });
     }
-  };
+
+    try {
+      const quizzes = await fetchQuizzes();
+      console.log(quizzes);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.filters !== this.state.filters) {
