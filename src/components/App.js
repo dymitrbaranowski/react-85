@@ -1,10 +1,11 @@
+import toast, { Toaster } from 'react-hot-toast';
+
 import { QuizForm } from './QuizForm/QuizForm';
 import { QuizList } from './QuizList/QuizList';
 import { SearchBar } from './SearchBar';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 import { createQuiz, deleteQuizById, fetchQuizzes } from './api';
 
 export class App extends Component {
@@ -63,6 +64,7 @@ export class App extends Component {
           quiz => quiz.id !== deletedQuiz.id
         ),
       }));
+      toast.success('ВСЕ ОК');
     } catch (error) {
       this.setState({ error: true });
     } finally {
@@ -133,6 +135,7 @@ export class App extends Component {
         )}
 
         <GlobalStyle />
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       </Layout>
     );
   }
