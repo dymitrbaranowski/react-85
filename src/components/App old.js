@@ -19,28 +19,28 @@ export class App extends Component {
   //   },
   // };
 
-  // async componentDidMount() {
-  //   const savedFilters = localStorage.getItem('quiz-filters');
-  //   if (savedFilters !== null) {
-  //     this.setState({ filters: JSON.parse(savedFilters) });
-  //   }
+  async componentDidMount() {
+    const savedFilters = localStorage.getItem('quiz-filters');
+    if (savedFilters !== null) {
+      this.setState({ filters: JSON.parse(savedFilters) });
+    }
 
-  //   try {
-  //     this.setState({ loading: true });
-  //     const quizzes = await fetchQuizzes();
-  //     this.setState({ quizItems: quizzes });
-  //   } catch (error) {
-  //     this.setState({ error: true });
-  //   } finally {
-  //     this.setState({ loading: false });
+    // try {
+    //   this.setState({ loading: true });
+    //   const quizzes = await fetchQuizzes();
+    //   this.setState({ quizItems: quizzes });
+    // } catch (error) {
+    //   this.setState({ error: true });
+    // } finally {
+    //   this.setState({ loading: false });
+    // }
+  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.filters !== this.state.filters) {
+  //     localStorage.setItem('quiz-filters', JSON.stringify(this.state.filters));
   //   }
   // }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.filters !== this.state.filters) {
-      localStorage.setItem('quiz-filters', JSON.stringify(this.state.filters));
-    }
-  }
   // addQuiz = async newQuiz => {
   //   try {
   //     this.setState({ loading: true, error: false });

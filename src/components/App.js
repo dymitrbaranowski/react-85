@@ -14,9 +14,16 @@ export const App = () => {
   const [quizItems, setquizItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [filters, setfilters] = useState({
-    topic: '',
-    level: 'all',
+  const [filters, setfilters] = useState(() => {
+    const savedFilters = localStorage.getItem('quiz-filters');
+    if (savedFilters !== null) {
+      return JSON.parse(savedFilters);
+    }
+
+    return {
+      topic: '',
+      level: 'all',
+    };
   });
 
   useEffect(() => {
@@ -34,6 +41,10 @@ export const App = () => {
     }
     getQuizzes();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('quiz-filters', JSON.stringify(filters));
+  }, [filters]);
 
   const changeLevelFilter = newLevel => {
     setfilters(prevFilters => ({ ...prevFilters, level: newLevel }));
