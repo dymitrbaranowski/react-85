@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -12,12 +12,28 @@ import { createQuiz, deleteQuizById, fetchQuizzes } from './api';
 
 export const App = () => {
   const [quizItems, setquizItems] = useState([]);
-  const [loading, setloading] = useState(false);
-  const [error, seterror] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [filters, setfilters] = useState({
     topic: '',
     level: 'all',
   });
+
+  useEffect(() => {
+    async function getQuizzes() {
+      try {
+        setLoading(true);
+        setError(false);
+        const quizzes = await fetchQuizzes();
+        setquizItems(quizzes);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getQuizzes();
+  }, []);
 
   const changeLevelFilter = newLevel => {
     setfilters(prevFilters => ({ ...prevFilters, level: newLevel }));
