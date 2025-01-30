@@ -14,7 +14,11 @@ export const RefExample = () => {
   const scrollToForm = () => {
     console.log('scroll???');
 
-    console.log(formRef);
+    const { top } = formRef.current.getBoundingClientRect();
+    window.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
   };
 
   return (

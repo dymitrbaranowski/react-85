@@ -9,9 +9,9 @@ export const App = () => {
   return (
     <Layout>
       {/* <SkipMountEffect /> */}
-      <RefExample />
+      {/* <RefExample /> */}
       {/* <HttpReqAbort /> */}
-      {/* <HttpReqAbortOnEvent /> */}
+      <HttpReqAbortOnEvent />
       {/* <UseMemoExample /> */}
     </Layout>
   );
