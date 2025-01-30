@@ -11,8 +11,8 @@ export const App = () => {
       {/* <SkipMountEffect /> */}
       {/* <RefExample /> */}
       {/* <HttpReqAbort /> */}
-      <HttpReqAbortOnEvent />
-      {/* <UseMemoExample /> */}
+      {/* <HttpReqAbortOnEvent /> */}
+      <UseMemoExample />
     </Layout>
   );
 };
