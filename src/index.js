@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { App } from 'components/App';
+import { BrowserRouter } from 'react-router-dom';
 // import { Basics } from 'Basics';
 const theme = {
   colors: {
@@ -21,10 +22,12 @@ const theme = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
+    <BrowserRouter basename="/react-85">
+      <ThemeProvider theme={theme}>
+        <App />
 
-      {/* <Basics /> */}
-    </ThemeProvider>
+        {/* <Basics /> */}
+      </ThemeProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
