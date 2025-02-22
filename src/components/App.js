@@ -7,9 +7,18 @@ import { QuizList } from './QuizList/QuizList';
 import { SearchBar } from './SearchBar';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
-
 import { createQuiz, deleteQuizById, fetchQuizzes } from './api';
+import { Routes, Route } from 'react-router-dom';
 
+export const App = () => {
+  return (
+    <Routes>
+      <Route path="/quizzes" element={<div>Quizzes Page</div>} />
+      <Route path="/create" element={<div>Create quiz Page</div>} />
+      <Route path="/:quizId" element={<div>Single quiz Page</div>} />
+    </Routes>
+  );
+};
 // export const App = () => {
 //   const [quizItems, setquizItems] = useState([]);
 //   const [loading, setLoading] = useState(false);

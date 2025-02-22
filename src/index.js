@@ -22,7 +22,7 @@ const theme = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-85">
+    <BrowserRouter basename="react-85/tree/09-routing">
       <ThemeProvider theme={theme}>
         <App />
 
