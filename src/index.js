@@ -1,32 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-import { App } from 'components/App';
 import { BrowserRouter } from 'react-router-dom';
-// import { Basics } from 'Basics';
-const theme = {
-  colors: {
-    black: '#212121',
-    white: '#fff',
-    red: 'red',
-    green: 'green',
-    orange: 'orange',
-  },
-  radii: {
-    sm: '4px',
-    md: '8px',
-    lg: '16px',
-  },
-  spacing: value => `${value * 4}px`,
-};
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import { App } from 'components/App';
+import { theme } from 'constants/theme';
+// import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="react-85/tree/09-routing">
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <App />
-
-        {/* <Basics /> */}
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

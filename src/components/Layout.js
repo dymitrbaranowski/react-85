@@ -1,10 +1,19 @@
-import styled from 'styled-components';
+// import { Link } from 'react-router-dom';
 
-export const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-`;
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from '../redux/store';
+
+export const Layout = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(state => state.myValue);
+
+  return (
+    <div>
+      <nav>
+        {value}
+        <button onClick={() => dispatch(increment(100))}>Increment</button>
+        <button onClick={() => dispatch(decrement(50))}>Decrement</button>
+      </nav>
+    </div>
+  );
+};
