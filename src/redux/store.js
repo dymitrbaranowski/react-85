@@ -19,7 +19,7 @@ export const remove = createAction('items/remove');
 // The createReducer function from Redux Toolkit uses Immer to handle state updates.
 const itemsReducer = createReducer([], builder => {
   // builder.addCase(add, (state, action) => [...state, action.payload]);
-  builder.addCase(add, (state, action) => state.put(action.payload));
+  builder.addCase(add, (state, action) => state.push(action.payload));
   builder.addCase(remove, (state, action) =>
     state.filter(item => item.id !== action.payload.id)
   );
