@@ -12,7 +12,6 @@ export const LoginForm = () => {
     console.log('Form submitted');
     console.log('Username:', form.login.value);
     console.log('Password:', form.password.value);
-
     // Dispatch the login action with the form values
     dispatch(login({ login: form.login.value, password: form.password.value }));
     form.reset();

@@ -1,26 +1,42 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { UserMenu } from './UserMenu';
 
 export const AppBar = () => {
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  // Access the isLoggedIn state from the Redux store
   return (
     <header
       style={{
         padding: '10px',
         backgroundColor: '#f0f0f0',
-        borderBottom: '1px solid #ccc',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '16px',
-        color: '#333',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        width: '100%',
-        boxSizing: 'border-box',
-        marginBottom: '20px',
+        borderBottom: '1px solid #ccc',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        color: '#333',
         textDecoration: 'none',
+        transition: 'background-color 0.3s ease',
+        ':hover': {
+          backgroundColor: '#e0e0e0',
+        },
+        ':active': {
+          backgroundColor: '#d0d0d0',
+        },
+        ':focus': {
+          outline: '2px solid #007bff',
+          outlineOffset: '2px',
+        },
+        ':visited': {
+          color: '#555',
+        },
       }}
     >
       <nav>
@@ -30,6 +46,8 @@ export const AppBar = () => {
         <br />
         <Link to="/login">Login</Link>
       </nav>
+      {isLoggedIn && <UserMenu />}
     </header>
   );
 };
+// The AppBar component serves as the top navigation bar of the application, providing links to Home, About, and Login pages.
