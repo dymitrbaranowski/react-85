@@ -1,8 +1,11 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/userSlice'; // Adjust the import path as necessary
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // The LoginForm component is a form that allows users to log in by entering their username and password.
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -14,6 +17,7 @@ export const LoginForm = () => {
     console.log('Password:', form.password.value);
     // Dispatch the login action with the form values
     dispatch(login({ login: form.login.value, password: form.password.value }));
+    navigate('/dashboard', { replace: true });
     form.reset();
   };
   return (

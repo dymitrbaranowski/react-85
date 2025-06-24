@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { LoginPage } from 'pages/LoginPage';
+import { LoginPage, DashboardPage } from 'pages';
 import { Layout } from './Layout';
 
 export const App = () => {
@@ -8,6 +8,7 @@ export const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<LoginPage />} />
         <Route path="login" element={<LoginPage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
