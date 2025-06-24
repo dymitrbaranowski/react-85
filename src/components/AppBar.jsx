@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 import { UserMenu } from './UserMenu';
 
 export const AppBar = () => {
@@ -44,7 +43,9 @@ export const AppBar = () => {
         <br />
         <Link to="/about">About</Link>
         <br />
-        <Link to="/login">Login</Link>
+        {!isLoggedIn && <Link to="/login">Login</Link>}
+
+        {isLoggedIn && <Link to="/dashboard">Dashboard</Link>}
       </nav>
       {isLoggedIn && <UserMenu />}
     </header>
