@@ -14,12 +14,14 @@ import { clicksReducer } from './clickSlice';
 export const store = configureStore({
   reducer: {
     clicks: clicksReducer, // Use the clickSlice reducer
-    middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }),
+  },
+  middleware(getDefaultMiddleware) {
+    // Add any custom middleware here if needed
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    });
   },
 });
 
