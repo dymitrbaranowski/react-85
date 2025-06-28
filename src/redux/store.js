@@ -8,6 +8,7 @@ import { clickSlice } from './clickSlice';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['value'], // only persist the value slice
 };
 
 const persistedClicksReducer = persistReducer(
