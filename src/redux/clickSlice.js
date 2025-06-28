@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-export const clickSlice = createSlice({
+const clickSlice = createSlice({
   name: 'clicks',
-  initialState: { value: 0, a: 1, b: 2, c: 3 },
+  initialState: { value: 0 },
   reducers: {
     update: (state, action) => {
       state.value += action.payload;
@@ -10,4 +12,16 @@ export const clickSlice = createSlice({
   },
 });
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['value'], // only persist the value slice
+};
+
+export const clicksReducer = persistReducer(persistConfig, clickSlice.reducer);
+
 export const { update } = clickSlice.actions;
+
+//Selectors
+
+export const getClicksValue = state => state.clicks.value;
