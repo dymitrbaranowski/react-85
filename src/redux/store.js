@@ -1,11 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit';
 // Import the clickSlice reducer
-import { persistStore } from 'redux-persist';
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import { clicksReducer } from './clickSlice';
 
 export const store = configureStore({
   reducer: {
     clicks: clicksReducer, // Use the clickSlice reducer
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
   },
 });
 
