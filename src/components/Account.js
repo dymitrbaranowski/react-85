@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-
+import { deposit } from '../redux/store';
 export const Account = () => {
   const dispatch = useDispatch();
   // This is a placeholder for the deposit action, you can use it to dispatch a deposit
@@ -9,7 +9,8 @@ export const Account = () => {
     <div>
       <div>Balance: ${balance}</div>
       <button
-        onClick={() => dispatch({ type: 'account/deposit', payload: 10 })}
+        onClick={() => dispatch(deposit(10))}
+        style={{ marginRight: '10px' }}
       >
         Deposit
       </button>
