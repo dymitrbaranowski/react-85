@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { legacy_createStore as createStore } from 'redux';
 import { devToolsEnhancer } from '@redux-devtools/extension';
 
 const initialState = {
@@ -7,16 +7,20 @@ const initialState = {
   },
 };
 
-export const deposit = value => {
-  return {
-    type: 'account/deposit',
-    payload: value,
-  };
-};
+// const deposit = {
+//     type: 'account/deposit',
+//     payload: 10,
+// }
 
-const rootReducer = (state = initialState, action) => {
+export const deposit = amount => ({
+  type: 'account/deposit',
+  payload: amount,
+});
+
+const rootReduser = (state = initialState, action) => {
   return state;
 };
-const enchancer = devToolsEnhancer();
 
-export const store = createStore(rootReducer, enchancer);
+const enhancer = devToolsEnhancer();
+
+export const store = createStore(rootReduser, enhancer);
