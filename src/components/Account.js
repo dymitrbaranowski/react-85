@@ -1,22 +1,15 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { deposit, withdraw } from 'redux/accountSlice';
-import { Balance } from './Balance';
+import { useDispatch, useSelector } from 'react-redux';
+import { deposit } from 'redux/store';
 
 export const Account = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState(0);
-
+  const balance = useSelector(state => state.account.balance);
+  // This is a placeholder for the balance, you can use it to display the balance in the UI
   return (
     <div>
-      <Balance />
-      <input
-        type="number"
-        value={value}
-        onChange={e => setValue(Number(e.target.value))}
-      />
-      <button onClick={() => dispatch(deposit(value))}>Deposit</button>
-      <button onClick={() => dispatch(withdraw(value))}>Withdraw</button>
+      <div>Balance: ${balance}</div>
+      <button onClick={() => dispatch(deposit(100))}>Deposit</button>
+      <button>Withdraw</button>
     </div>
   );
 };
