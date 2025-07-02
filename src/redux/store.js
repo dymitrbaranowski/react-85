@@ -1,26 +1,15 @@
-import { legacy_createStore as createStore } from 'redux';
+import { legacy_createStore as createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from '@redux-devtools/extension';
+import { accountReduser } from './accountSlice';
+import { localeReducer } from './localeSlice';
 
-const initialState = {
-  account: {
-    balance: 500,
-  },
-};
-
-// const deposit = {
-//     type: 'account/deposit',
-//     payload: 10,
-// }
-
-export const deposit = amount => ({
-  type: 'account/deposit',
-  payload: amount,
+const rootReduser = combineReducers({
+  account: accountReduser,
+  locale: localeReducer,
 });
 
-const rootReduser = (state = initialState, action) => {
-  return state;
-};
-
+// Enhancer for Redux DevTools
+// This allows you to use the Redux DevTools extension in your browser for debugging
 const enhancer = devToolsEnhancer();
 
 export const store = createStore(rootReduser, enhancer);

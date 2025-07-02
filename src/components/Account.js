@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deposit } from '../redux/store';
+import { deposit, withdraw } from '../redux/accountSlice';
 export const Account = () => {
   const dispatch = useDispatch();
   // This is a placeholder for the deposit action, you can use it to dispatch a deposit
@@ -14,7 +14,7 @@ export const Account = () => {
       >
         Deposit
       </button>
-      <button>Withdraw</button>
+      <button onClick={() => dispatch(withdraw(5))}>Withdraw</button>
     </div>
   );
 };
