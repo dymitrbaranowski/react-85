@@ -1,3 +1,5 @@
+import { type } from '@testing-library/user-event/dist/type';
+
 // This reducer is not used in the current implementation, but can be used for future enhancements
 export const localeReducer = (state = { lang: 'uk' }, action) => {
   switch (action.type) {
@@ -9,4 +11,11 @@ export const localeReducer = (state = { lang: 'uk' }, action) => {
     default:
       return state;
   }
+};
+
+export const changeLang = newLang => {
+  return {
+    type: 'locale/set',
+    payload: { lang: newLang },
+  };
 };
