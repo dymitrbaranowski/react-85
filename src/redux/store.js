@@ -1,15 +1,11 @@
-import { legacy_createStore as createStore, combineReducers } from 'redux';
-import { devToolsEnhancer } from '@redux-devtools/extension';
+import { configureStore } from '@reduxjs/toolkit';
 import { accountReduser } from './accountSlice';
 import { localeReducer } from './localeSlice';
 
-const rootReduser = combineReducers({
-  account: accountReduser,
-  locale: localeReducer,
+export const store = configureStore({
+  reducer: {
+    account: accountReduser,
+    locale: localeReducer,
+  },
+  devTools: process.env.NODE_ENV !== 'production', // Enable DevTools only in development
 });
-
-// Enhancer for Redux DevTools
-// This allows you to use the Redux DevTools extension in your browser for debugging
-const enhancer = devToolsEnhancer();
-
-export const store = createStore(rootReduser, enhancer);

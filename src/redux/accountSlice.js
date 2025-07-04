@@ -1,27 +1,17 @@
-export const accountReduser = (state = { balance: 500 }, action) => {
-  switch (action.type) {
-    case 'account/deposit':
-      return {
-        ...state,
-        balance: state.balance + action.payload,
-      };
-    case 'account/withdraw':
-      return {
-        ...state,
-        balance: state.balance - action.payload,
-      };
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
-    default:
-      return state;
-  }
-};
+export const deposit = createAction('account/deposit');
 
-export const deposit = amount => ({
-  type: 'account/deposit',
-  payload: amount,
-});
+export const withdraw = createAction('account/withdraw');
 
-export const withdraw = amount => ({
-  type: 'account/withdraw',
-  payload: amount,
-});
+export const accountReduser = createReducer({ balance: 500 }, builder =>
+  builder
+    .addCase(deposit, (state, action) => {
+      state.balance += action.payload;
+    })
+    .addCase(withdraw, (state, action) => {
+      state.balance -= action.payload;
+    })
+);
+
+export const resetAccount = createAction('account/reset');
