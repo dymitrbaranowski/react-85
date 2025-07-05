@@ -1,21 +1,14 @@
-import { type } from '@testing-library/user-event/dist/type';
+import { createSlice } from '@reduxjs/toolkit';
 
-// This reducer is not used in the current implementation, but can be used for future enhancements
-export const localeReducer = (state = { lang: 'uk' }, action) => {
-  switch (action.type) {
-    case 'locale/set':
-      return {
-        ...state,
-        ...action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const slice = createSlice({
+  name: 'locale',
+  initialState: { lang: 'uk' },
+  reducers: {
+    setLocale(state, action) {
+      state.lang = action.payload.lang;
+    },
+  },
+});
 
-export const changeLang = newLang => {
-  return {
-    type: 'locale/set',
-    payload: { lang: newLang },
-  };
-};
+export const { setLocale } = slice.actions;
+export const localeReducer = slice.reducer;
